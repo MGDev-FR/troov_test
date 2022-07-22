@@ -1,7 +1,7 @@
 <template>
     <div>
-        <b-navbar toggleable="lg" type="dark" variant="info">
-            <b-navbar-brand href="/">NavBar</b-navbar-brand>
+        <b-navbar toggleable="lg" type="dark" variant="info" class="mb-5">
+            <b-navbar-brand to="/">Troov'APP</b-navbar-brand>
 
             <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -11,8 +11,8 @@
                 <b-nav-item @click="$auth.logout()">Logout</b-nav-item>
             </b-navbar-nav>
             <b-navbar-nav v-else>
-                <b-nav-item href="/login">Login</b-nav-item>
-                <b-nav-item href="/register">Register</b-nav-item>
+                <b-nav-item to="/login">Login</b-nav-item>
+                <b-nav-item to="/register">Register</b-nav-item>
             </b-navbar-nav>
             </b-collapse>
         </b-navbar>

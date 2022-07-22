@@ -1,37 +1,12 @@
 <template>
-  <div>
-    <b-form v-if="show">
-      <b-form-group
-        label="Titre :"
-        label-for="title"
-      >
-        <b-form-input
-          id="title"
-          v-model="form.title"
-          type="text"
-          placeholder="Titre de l'article"
-          required
-        ></b-form-input>
-      </b-form-group>
-
-      <b-form-group 
-        label="Article :" 
-        label-for="content"
-      >
-        <b-form-textarea
-          id="content"
-          v-model="form.content"
-          placeholder="Écrivez votre article ici..."
-          required
-        ></b-form-textarea>
-      </b-form-group>
-
-      <b-button type="button" @click="sendPost(form)" variant="primary">Publier</b-button>
-    </b-form>
+  <div class="container">
+    <PostForm submitButton="Publier" :submitForm="sendPost" />
   </div>
 </template>
 
 <script>
+  import PostForm from '../../components/PostForm.vue'
+
   export default {
     data() {
       return {
@@ -41,6 +16,9 @@
         },
         show: true
       }
+    },
+    components: {
+      PostForm
     },
     middleware: "auth",
     methods: {

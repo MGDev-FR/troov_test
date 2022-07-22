@@ -1,7 +1,7 @@
 <template>
-    <v-container>
+    <div class="container">
         <UserAuthForm buttonText="S'inscrire" :submitForm="registerUser" />
-    </v-container>
+    </div>
 </template>
 
 <script>

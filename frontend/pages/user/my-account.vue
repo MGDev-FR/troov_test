@@ -1,13 +1,17 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-4" v-for="post in posts" :key="post._id">
+      <div class="col-6" v-for="post in posts" :key="post._id">
         <b-card
           :title="post.title"
           tag="article"
           style="max-width: 20rem;"
-          class="mb-2"
+          class="mb-2 mt-2 b-card-post"
         >
+          <div class="edit-functions">
+            <router-link v-if="post.userId == $auth.user._id" :to="{ name: 'posts-id', params: {id: post._id} }"><b-icon-pencil></b-icon-pencil></router-link>
+            <b-icon-trash></b-icon-trash>
+          </div>
           <b-card-text>
             {{ post.content.substr(0, 30) }} ...
           </b-card-text>
@@ -74,7 +78,18 @@
         .then(res => {
           this.posts = res.data;
         });
-      }
+      },
     }
   }
 </script>
+
+<style scoped>
+.b-card-post {
+  position: relative;
+}
+.edit-functions {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+</style>
