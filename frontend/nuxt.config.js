@@ -37,6 +37,7 @@ export default {
     'bootstrap-vue/nuxt',
     '@nuxtjs/axios',
     '@nuxtjs/auth',
+    '@nuxtjs/toast',
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -45,6 +46,10 @@ export default {
 
   axios: {
     baseURL: 'http://localhost:3001/api'
+  },
+
+  server: {
+    port: 8000
   },
 
   auth: {
@@ -67,5 +72,9 @@ export default {
         }
       }
     }
+  },
+
+  toast: {
+    position: 'top-center',
   }
 }
