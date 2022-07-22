@@ -12,9 +12,13 @@ export default {
     },
     methods: {
         loginUser(loginInfo){
-            this.$auth.loginWith('local', {
-                data: loginInfo
-            })
+            this.$auth.loginWith('local', {data: loginInfo})
+                .then(res => {
+                    console.log(res);
+                })
+                .catch(err => {
+                    this.$toast.error("Le mot de passe et/ou l'email sont incorrects !");
+                });
         }
     }
 }
