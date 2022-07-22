@@ -1,5 +1,10 @@
 <template>
   <div class="container">
+    <div class="row mb-3">
+      <div class="col">
+        <b-link to="/user/my-account"><b-icon-arrow-left></b-icon-arrow-left> Retour à la liste des articles</b-link>
+      </div>
+    </div>
     <PostForm submitButton="Publier" :submitForm="sendPost" />
   </div>
 </template>

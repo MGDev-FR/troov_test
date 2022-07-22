@@ -1,5 +1,10 @@
 <template>
   <div class="container">
+    <div class="row mb-3">
+      <div class="col text-center">
+        <b-button variant="primary" to="/posts/add-post"><b-icon-plus-circle></b-icon-plus-circle> Créer un article</b-button>
+      </div>
+    </div>
     <div class="row">
       <div class="col-md-6 col-sm-12" v-for="post in posts" :key="post._id">
 
@@ -43,7 +48,7 @@
 
           <div class="row">
             <div class="col text-center">
-              <b-button href="#" variant="primary">Lire la suite</b-button>
+              <b-button :to="{ name: 'show-post-id', params: {id: post._id} }" variant="primary">Lire la suite</b-button>
             </div>
           </div>
         </b-card>
