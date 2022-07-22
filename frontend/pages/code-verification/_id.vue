@@ -29,9 +29,14 @@ export default {
     },
     methods: {
         submitForm(code){
-            this.$axios.post('/auth/password-verification-code', {code})
+            this.$axios.post('/password/verification-code', {
+                    code: code, id: this.$route.params.id
+                })
                 .then(res => {
-                    this.$toast.success(res.data.message);
+                    if (res.status === 200){
+                        this.$router.push({ name: 'new-password-token', params: {token: res.data.token}});
+                        this.$toast.success(res.data.message);
+                    }  
                 })
                 .catch(err => {
                     console.log(err);

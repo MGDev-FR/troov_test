@@ -30,7 +30,7 @@ export default {
     },
     methods: {
         submitForm(email){
-            this.$axios.post('/auth/password-reset', {email})
+            this.$axios.post('/password/reset', {email})
                 .then(res => {
                     this.$router.push({ name: 'code-verification-id', params: {id: res.data.userId}})
                     this.$toast.success(res.data.message);

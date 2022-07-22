@@ -1,8 +1,9 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-6" v-for="post in posts" :key="post._id">
+      <div class="col-md-6 col-sm-12" v-for="post in posts" :key="post._id">
         <b-card
+          :id="'bcard-' + post._id"
           :title="post.title"
           tag="article"
           style="max-width: 20rem;"
@@ -10,7 +11,7 @@
         >
           <div class="edit-functions">
             <router-link v-if="post.userId == $auth.user._id" :to="{ name: 'posts-id', params: {id: post._id} }"><b-icon-pencil></b-icon-pencil></router-link>
-            <b-icon-trash></b-icon-trash>
+            <b-icon-trash v-if="post.userId == $auth.user._id" @click="removePost(post._id)"></b-icon-trash>
           </div>
           <b-card-text>
             {{ post.content.substr(0, 30) }} ...
@@ -79,6 +80,14 @@
           this.posts = res.data;
         });
       },
+      removePost(postId){
+        if(confirm('are you sure?'))
+        this.$axios.delete('/posts/' + postId)
+        .then(res => {
+          document.getElementById('bcard-'+postId).style.display = 'none';
+          this.$toast.success(res.data.message);
+        });
+      }
     }
   }
 </script>
