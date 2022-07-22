@@ -8,6 +8,7 @@
             <b-collapse id="nav-collapse" is-nav>
             <b-navbar-nav v-if="$auth.loggedIn">
                 Username
+                <b-nav-item @click="$auth.logout()">Logout</b-nav-item>
             </b-navbar-nav>
             <b-navbar-nav v-else>
                 <b-nav-item href="/login">Login</b-nav-item>

@@ -53,6 +53,12 @@ export default {
   },
 
   auth: {
+    redirect: {
+      login: "/login",
+      logout: "/",
+      home: "/my-account",
+    },
+
     strategies: {
       local: {
         token: {
