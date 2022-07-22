@@ -50,6 +50,7 @@
           console.log(response);
           if (response.status === 200){
             this.$toast.success(response.data.message);
+            this.$router.push({ name: "user/my-account" });
           }
         })
         .catch((err) => {

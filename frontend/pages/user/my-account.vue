@@ -1,0 +1,80 @@
+<template>
+  <div class="container">
+    <div class="row">
+      <div class="col-4" v-for="post in posts" :key="post._id">
+        <b-card
+          :title="post.title"
+          tag="article"
+          style="max-width: 20rem;"
+          class="mb-2"
+        >
+          <b-card-text>
+            {{ post.content.substr(0, 30) }} ...
+          </b-card-text>
+
+          <b-card-text>
+            <div class="row">
+              <div class="col text-center">
+                <b-icon-hand-thumbs-up-fill @click="addLike(post._id, 1)" v-if="includes(post.usersLiked, $auth.user._id)"></b-icon-hand-thumbs-up-fill> 
+                <b-icon-hand-thumbs-up @click="addLike(post._id, 1)" v-else></b-icon-hand-thumbs-up> 
+                {{ post.likes }}
+              </div>
+              <div class="col text-center">
+                <b-icon-hand-thumbs-down-fill @click="addLike(post._id, -1)" v-if="includes(post.usersDisliked, $auth.user._id)"></b-icon-hand-thumbs-down-fill> 
+                <b-icon-hand-thumbs-down @click="addLike(post._id, -1)" v-else></b-icon-hand-thumbs-down>
+                {{ post.dislikes }}
+              </div>
+            </div>
+          </b-card-text>
+
+          <div class="row">
+            <div class="col text-center">
+              <b-button href="#" variant="primary">Lire la suite</b-button>
+            </div>
+          </div>
+        </b-card>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+  import { includes } from 'lodash';
+  export default {
+    data() {
+      return {
+        posts: [],
+        includes: includes,
+      }
+    },
+    middleware: "auth",
+    mounted() {
+      this.getAllPosts();
+    },
+    methods: {
+      async addLike(postId, likeType){
+        await this.$axios.post('/posts/'+postId+'/like', {
+          like: likeType
+        })
+          .then(res => {
+            this.getAllPosts();
+            if (res.data.type === 'danger'){
+              this.$toast.error(res.data.message);
+            } else {
+              this.$toast.success(res.data.message);
+            }
+            
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      },
+      async getAllPosts(){
+        await this.$axios.get('/posts')
+        .then(res => {
+          this.posts = res.data;
+        });
+      }
+    }
+  }
+</script>

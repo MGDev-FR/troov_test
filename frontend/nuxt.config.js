@@ -1,3 +1,5 @@
+import webpack from "webpack";
+
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -40,8 +42,17 @@ export default {
     '@nuxtjs/toast',
   ],
 
+  bootstrapVue: {
+    icons: true
+  },
+
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    plugins: [
+      new webpack.ProvidePlugin({
+        _: "lodash",
+      }),
+    ],
   },
 
   axios: {
@@ -56,24 +67,24 @@ export default {
     redirect: {
       login: "/login",
       logout: "/",
-      home: "/my-account",
+      home: "/user/my-account",
     },
 
     strategies: {
       local: {
         token: {
-          property: 'token',
-          global: true,
+          property: "token",
+          name: "x-auth-token",
           required: true,
-          type: 'Bearer'
+          type: "Bearer",
+          global: true,
         },
         user: {
-          property: 'user',
-          // autoFetch: true
+          property: false,
+          autoFetch: true
         },
         endpoints: {
           login: { url: '/auth/login', method: 'post' },
-          logout: { url: '/auth/logout', method: 'post' },
           user: { url: '/sessions/me', method: 'get' }
         }
       }
@@ -82,5 +93,6 @@ export default {
 
   toast: {
     position: 'top-center',
+    duration: 3600
   }
 }
