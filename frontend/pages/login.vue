@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <UserAuthForm buttonText="Se connecter" :submitForm="loginUser" />
+        <UserAuthForm buttonText="Se connecter" :submitForm="loginUser" :showPasswordReset="true" />
     </div>
 </template>
 
