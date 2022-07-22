@@ -5,18 +5,9 @@
 </template>
 
 <script>
-  import PostForm from '../../components/PostForm.vue'
+  import PostForm from '@/components/PostForm.vue'
 
   export default {
-    data() {
-      return {
-        form: {
-          title: '',
-          content: ''
-        },
-        show: true
-      }
-    },
     components: {
       PostForm
     },
@@ -24,11 +15,10 @@
     methods: {
       async sendPost(form) {
         await this.$axios.post('/posts', form)
-        .then((response) => {
-          console.log(response);
-          if (response.status === 200){
-            this.$toast.success(response.data.message);
-            this.$router.push({ name: "user/my-account" });
+        .then((res) => {
+          if (res.status === 200){
+            this.$toast.success(res.data.message);
+            this.$router.push({ path: "/user/my-account" });
           }
         })
         .catch((err) => {

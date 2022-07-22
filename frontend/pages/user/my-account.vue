@@ -2,6 +2,15 @@
   <div class="container">
     <div class="row">
       <div class="col-md-6 col-sm-12" v-for="post in posts" :key="post._id">
+
+        <b-modal id="remove-post-confirm">
+            <h4 class="my-4">Êtes-vous sûr(e) de vouloir supprimer cet article ?</h4>
+            <template #modal-footer>
+              <b-button class="mt-3" @click="$bvModal.hide('remove-post-confirm');removePost(post._id)" variant="primary">Oui</b-button>
+            <b-button class="mt-3" @click="$bvModal.hide('remove-post-confirm')" variant="secondary">Non</b-button>
+            </template>
+        </b-modal>
+
         <b-card
           :id="'bcard-' + post._id"
           :title="post.title"
@@ -11,7 +20,7 @@
         >
           <div class="edit-functions">
             <router-link v-if="post.userId == $auth.user._id" :to="{ name: 'posts-id', params: {id: post._id} }"><b-icon-pencil></b-icon-pencil></router-link>
-            <b-icon-trash v-if="post.userId == $auth.user._id" @click="removePost(post._id)"></b-icon-trash>
+            <b-icon-trash v-if="post.userId == $auth.user._id" v-b-modal.remove-post-confirm></b-icon-trash>
           </div>
           <b-card-text>
             {{ post.content.substr(0, 30) }} ...
@@ -81,7 +90,6 @@
         });
       },
       removePost(postId){
-        if(confirm('are you sure?'))
         this.$axios.delete('/posts/' + postId)
         .then(res => {
           document.getElementById('bcard-'+postId).style.display = 'none';

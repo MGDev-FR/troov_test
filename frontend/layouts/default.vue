@@ -7,7 +7,6 @@
 
             <b-collapse id="nav-collapse" is-nav>
             <b-navbar-nav v-if="$auth.loggedIn">
-                Username
                 <b-nav-item @click="$auth.logout()">Déconnexion</b-nav-item>
             </b-navbar-nav>
             <b-navbar-nav v-else>
