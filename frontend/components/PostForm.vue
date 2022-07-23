@@ -40,6 +40,6 @@ export default {
             show: true
         }
     },
-    props: ["submitButton", "submitForm"]
+    props: ["submitButton", "submitForm", "title", "content"]
 }
 </script>
