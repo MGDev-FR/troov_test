@@ -14,6 +14,6 @@
 - In the folder frontend : `npm run dev`
 - The frontend server is launched on : `http://localhost:3000`
 
-### Use the email on local
+### Use the email on localhost
 - Launch maildev with the following command : `maildev --web 1080 --smtp 1025 --ip 127.0.0.1 --hide-extensions STARTTLS`
 - Then you can access to the email sent on : `http://127.0.0.1:1080/`
