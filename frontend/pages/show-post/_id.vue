@@ -5,7 +5,7 @@
             <div class="col">
                 <b-link to="/user/my-account"><b-icon-arrow-left></b-icon-arrow-left> Retour à la liste des articles</b-link>
             </div>
-            <div class="col text-end">
+            <div class="col text-right">
                 <router-link v-if="post.userId == $auth.user._id" :to="{ name: 'posts-id', params: {id: post._id} }"><b-icon-pencil></b-icon-pencil></router-link>
                 <b-icon-trash v-if="post.userId == $auth.user._id" v-b-modal.remove-post-confirm></b-icon-trash>
             </div>

@@ -1,5 +1,6 @@
 <template>
     <div class="container">
+        <h1>Inscription</h1>
         <UserAuthForm buttonText="S'inscrire" :submitForm="registerUser" />
     </div>
 </template>
@@ -17,10 +18,11 @@ export default {
                 data: registrationInfo
             });
         }
+    },
+    mounted() {
+        if (this.$auth.loggedIn){
+            this.$router.push({path: '/user/my-account'});
+        }
     }
 }
 </script>
-
-<style lang="scss" scoped>
-
-</style>

@@ -8,11 +8,11 @@
     <div class="row">
       <div class="col-md-6 col-sm-12" v-for="post in posts" :key="post._id">
 
-        <b-modal id="remove-post-confirm">
+        <b-modal :id="'remove-post-confirm-' + post._id">
             <h4 class="my-4">Êtes-vous sûr(e) de vouloir supprimer cet article ?</h4>
             <template #modal-footer>
-              <b-button class="mt-3" @click="$bvModal.hide('remove-post-confirm');removePost(post._id)" variant="primary">Oui</b-button>
-            <b-button class="mt-3" @click="$bvModal.hide('remove-post-confirm')" variant="secondary">Non</b-button>
+              <b-button class="mt-3" @click="$bvModal.hide('remove-post-confirm-' + post._id);removePost(post._id)" variant="primary">Oui</b-button>
+            <b-button class="mt-3" @click="$bvModal.hide('remove-post-confirm-' + post._id)" variant="secondary">Non</b-button>
             </template>
         </b-modal>
 
@@ -25,10 +25,10 @@
         >
           <div class="edit-functions">
             <router-link v-if="post.userId == $auth.user._id" :to="{ name: 'posts-id', params: {id: post._id} }"><b-icon-pencil></b-icon-pencil></router-link>
-            <b-icon-trash v-if="post.userId == $auth.user._id" v-b-modal.remove-post-confirm></b-icon-trash>
+            <b-icon-trash v-if="post.userId == $auth.user._id" @click="$bvModal.show('remove-post-confirm-' + post._id)"></b-icon-trash>
           </div>
           <b-card-text>
-            {{ post.content.substr(0, 30) }} ...
+            {{ post.content.substr(0, 100) }} ...
           </b-card-text>
 
           <b-card-text>

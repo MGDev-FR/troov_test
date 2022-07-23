@@ -1,5 +1,6 @@
 <template>
     <div class="container">
+        <h1>Connexion</h1>
         <UserAuthForm buttonText="Se connecter" :submitForm="loginUser" :showPasswordReset="true" />
     </div>
 </template>
@@ -19,6 +20,11 @@ export default {
                 .catch(err => {
                     this.$toast.error("Le mot de passe et/ou l'email sont incorrects !");
                 });
+        }
+    },
+    mounted() {
+        if (this.$auth.loggedIn){
+            this.$router.push({path: '/user/my-account'});
         }
     }
 }
